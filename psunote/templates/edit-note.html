@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container my-4">
+    <ul class="nav justify-content-center" style="padding-top: 1em;">
+        <li class="nav-item">
+            <a class="btn btn-primary" href="{{ url_for('index') }}">Cancel</a>
+        </li>
+    </ul>
+
+    <h3 class="my-4 text-center">Edit Note</h3>
+
+    <div class="card">
+        <div class="card-body">
+            <form action="" method="POST"> <!-- Form starts here -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Note Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ note.title }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Note Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="5" required>{{ note.description }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tags" class="form-label">Tags (comma-separated)</label>
+                    <input type="text" class="form-control" id="tags" name="tags" value="{{ note.tags|map(attribute='name')|join(', ') }}">
+                </div>
+
+                <div class="card-footer text-muted">
+                    <p>Note ID: {{ note_id }}</p>  <!-- Display the note ID -->
+                    <p>Last update: {{ note.updated_date }}</p>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>  <!-- Save button -->
+            </form> <!-- Form ends here -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
